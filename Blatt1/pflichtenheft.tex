@@ -31,7 +31,7 @@
  
 %\assignmentdeadline{}         % Abgabedatum: XYZ
 %\assignmentduration{15 Minuten} % Bearbeitungsdauer: XYZ
-% \studentdata                      % Name & Matrikelnummer Feld
+%\studentdata{Jonas Otto}                      % Name & Matrikelnummer Feld
 
 \assignmenttype{}
 \assignmentno{}
@@ -161,6 +161,86 @@ BESCHREIBUNG: & Der Benutzer soll die Möglichkeit haben, eine neue Lobby zu ers
 BEGRÜNDUNG: & Um eine Spielpartie zu spielen, braucht der Benutzer einen Gegenspieler, um sich mit diesem zu einer Spielpartie zu verabreden, muss eine Lobby existieren, in welcher sich beide Benutzer befinden. \\
 \hline
 ABHÄNGIGKEITEN: & FA2\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA4} \\
+\hline
+TITEL: & Lobby beitreten \\
+\hline
+BESCHREIBUNG: & Der Benutzer soll die Möglichkeit haben, einer bestehenden Lobby beizutreten.
+Eine Lobby kann betreten werden, indem der Benutzer auf eine Schaltfläche (Button) mit der Aufschrift 'Beitreten' in der Liste vorhandener Lobbys (\textbf{FA2}) klickt.
+\\
+\hline
+BEGRÜNDUNG: & Um eine Spielpartie zu spielen, braucht der Benutzer einen Gegenspieler, um sich mit diesem zu einer Spielpartie zu verabreden, muss eine Lobby existieren, in welcher sich beide Benutzer befinden. \\
+\hline
+ABHÄNGIGKEITEN: & FA2\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA10} \\
+\hline
+TITEL: & Spielzüge des Gegners darstellen \\
+\hline
+BESCHREIBUNG: & Während des Spiels sollen Spielzüge des Gegners nach Empfang der entsprechenden Nachricht vom Server dargestellt werden.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA11} \\
+\hline
+TITEL: & Siegbedingung 1 erkennen \\
+\hline
+BESCHREIBUNG: & Wenn auf dem Spielbrett nur noch Spielsteine einer Farbe vorhanden sind, erfüllt dies Siegbedingung 1. Dies soll erkannt werden.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA12} \\
+\hline
+TITEL: & Siegbedingung 2 erkennen \\
+\hline
+BESCHREIBUNG: & Wenn kein weiterer Zug ausgeführt werden kann, erfüllt dies Siegbedingung 2, der Gewinner ist der Spieler mit den meisten Spielsteinen.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA13} \\
+\hline
+TITEL: & Spielsteine erobern \\
+\hline
+BESCHREIBUNG: & Nach einem Spielzug gewinnt der aktive Spieler die dem Zeil des Spielzuges direkt benachbarten gegnerischen Spielsteine.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA14} \\
+\hline
+TITEL: & Spielstein bewegen \\
+\hline
+BESCHREIBUNG: & Ein Spielstein soll bewegt werden, wenn der Spieler einen seiner eigenen Spielsteine um genau 2 Felder in eine Richtung bewegt.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
 \end{tabularx}
 
 \begin{tabularx}{16cm}{l|X}
