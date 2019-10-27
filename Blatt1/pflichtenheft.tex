@@ -1,0 +1,192 @@
+\documentclass{uulm-assignment}
+
+\usepackage{import}
+\usepackage{tabularx}
+\usepackage{listings}
+
+\usepackage{graphicx}
+
+\setboolean{showsolutions}{false}
+
+\ifthenelse{\boolean{showsolutions}}{
+\newcommand\mitloesung{1}%
+}{
+\newcommand\mitloesung{0}%
+}
+
+
+% Für Korrektur-Kommentare in roten Boxen:
+\newcommand{\flo}[1]{
+    \fcolorbox{purple}{pink}{\sffamily\scriptsize\bfseries\textcolor{black}{Flo:}} {\sffamily\bfseries\textcolor{purple}{#1}}
+}
+
+
+
+\hypersetup{colorlinks=false,urlcolor=uulm-in}
+
+\faculty{Institut für Softwaretechnik und Programmiersprachen\hspace{0.05cm}}
+\course{Softwaregrundprojekt}
+\semester{\hspace{0.05cm}WiSe 2019/20}
+\supervisor{\textbf{} \hspace{7.9cm} Prof. Dr. Matthias Tichy, Florian Ege, Dennis Jehle}
+ 
+%\assignmentdeadline{}         % Abgabedatum: XYZ
+%\assignmentduration{15 Minuten} % Bearbeitungsdauer: XYZ
+% \studentdata                      % Name & Matrikelnummer Feld
+
+\assignmenttype{}
+\assignmentno{}
+\title{Pflichtenheft}
+
+\begin{document}
+
+\maketitle
+
+\section{Einleitung}
+
+Der Zweck dieses Dokuments ist es, eine detaillierte Beschreibung der Anforderungen, sowie der
+Benutzerschnittstelle für die Anwendung \textbf{Hexxagon} bereitzustellen. Es wird abgegrenzt, welche
+Anforderungen erfüllt werden müssen, damit die entwickelte Anwendung vom Kunden akzeptiert
+wird.
+
+\subsection{Anwendungsbereich}
+
+Das Spiel \textbf{Hexxagon} ist eine Java-Anwendung, die es dem Benutzer ermöglicht, ein 2D-Spiel zu spielen.
+
+\subsection{Definitionen und Abkürzungen}
+
+Diese Tabelle enthält Abkürzungen und domänenspezifische Begriffe, die im Dokument verwendet
+werden.
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{Begriff} & \textbf{Definition} \\
+\hline
+Benutzer & In diesem Dokument wird immer dann von einem Benutzer gesprochen, wenn eine Person gemeint ist, die mit der Anwendung interagiert. Eine Person, die mit der Anwendung interagiert, ist solange ein Benutzer, bis diese sich innerhalb einer Spielpartie befindet, dann wird von einem Spieler gesprochen.\\
+\hline
+Spieler & Ein Spieler ist eine Person (männlich, weiblich, divers), welche sich innerhalb einer Spielpartie befindet und somit aktiv das Spiel Hexxagon spielt. \\
+\hline
+Lobby & Eine Lobby ist ein virtueller Raum, in welchem sich zwei Benutzer zu einer Spielpartie zusammenfinden können. \\
+\hline
+Spielpartie & Unter einer Spielpartie versteht man die aktive Ausführung des Regelwerks des Spiels 'Hexxagon' durch zwei Spieler, bis ein Spieler eine Siegbedingung erreicht oder das Spiel beendet wird. \\
+\hline
+Client & Unter einem Client versteht man, im Kontext dieses Dokuments, eine Java Anwendung, welche das Spiel 'Hexxagon' darstellt und dem Benutzer (Spieler) die Interaktion mit der Anwendung ermöglicht, sowie Nachrichten mit einem Server austauschen kann. \\
+\hline
+Server & Unter einem Server versteht man, im Kontext dieses Dokuments, eine Anwendung, die auf einem, über das Netzwerk erreichbaren, System installiert ist und Nachrichten mit mehreren Clients austauschen sowie Lobbies verwalten und Spielpartien ausführen kann. \\
+\end{tabularx}
+
+\textbf{\textit{Hinweis: Dieser Abschnitt des Pflichtenhefts ist von hoher Relevanz. Das definieren von verwendeten Begriffen mag vielleicht zunächst überflüssig erscheinen, da Ihnen als Entwickler die Bedeutung der Begrifflichkeiten bekannt ist, allerdings ist das Pflichtenheft hauptsächlich ein Dokument für den Kunden. Pflegen Sie diesen Abschnitt des Pflichtenhefts daher mit großer Sorgfalt, denn es könnte durchaus vorkommen, dass sich Ihr Tutor / Ihre Tutorin in einen technisch nicht versierten Kunden verwandelt und den Rotstift schwingt.}}
+
+\subsection{Überblick}
+
+Der Rest dieses Dokuments enthält zwei Kapitel. Das zweite Kapitel gibt einen Überblick über die
+Systemfunktionalität und behandelt die Systemeinschränkungen und Annahmen über das Produkt.
+Das dritte Kapitel stellt die detaillierte Anforderungsspezifikation bereit.
+
+\section{Allgemeine Beschreibung}
+
+Hexxagon ist ein rundenbasiertes Mehrspielerspiel. Es nehmen genau zwei Spieler an einer Spielpartie teil. Ziel des Spiels ist es, die meisten Spielsteine der eigenen Farbe auf dem Spielfeld zu besitzen. Der Spieler mit den meisten Spielsteinen gewinnt das Spiel.
+
+\subsection{Ansichten}
+
+Die Anwendung besteht aus mehreren Ansichten, sogenannten \textit{Views}, über welche der Benutzer mit dem Programm interagieren kann.
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{View} & \textbf{Beschreibung} \\
+\hline
+Hauptmenü & Nach dem Start der Anwendung befindet sich der Benutzer im Hauptmenü. Von hier aus kann der Benutzer auf verschiedene andere Ansichten navigieren. \\
+\hline
+Lobby Übersicht & Auf dieser Ansicht werden verfügbare Lobbies angezeigt oder neue Lobbies erstellt. Außerdem kann einer existierenden Lobby über diese Ansicht beigetreten werden. \\
+\hline
+Lobby & Auf dieser View werden alle Benutzer, die sich innerhalb einer konkreten Lobby befinden, angezeigt. Der Benutzer, der die Lobby als erstes betreten hat, kann, sobald sich exakt zwei Spieler in der Lobby befinden, über die Ansicht eine Spielpartie starten. \\
+\hline
+Spielbildschirm & Auf dieser View wird das eigentliche Spiel dargestellt. \\
+\end{tabularx}
+
+\subsection{Systemeinschränkungen und Abhängigkeiten}
+
+Die Anwendung wird durch die Prozessor- und/oder Grafikleistung des Systems begrenzt, auf dem es
+läuft. Um die Anwendung auszuführen, wird die \textbf{Java Runtime Environment} (JRE) benötigt.
+
+\section{Spezifische Anforderungen}
+
+Dieser Abschnitt enthält alle spezifischen Anforderungen des Systems. Er bietet eine detaillierte
+Beschreibung des Systems und seiner Funktionen.
+
+\subsection{Funktionale Anforderungen}
+
+Dieser Abschnitt enthält alle Anforderungen, die die grundlegenden Aktionen des Softwaresystems
+spezifizieren.
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA1} \\
+\hline
+TITEL: & Hauptmenü \\
+\hline
+BESCHREIBUNG: & Nach dem Anwendungsstart wird dem Benutzer das Hauptmenü angezeigt. Der Benutzer kann folgende Aktionen im Hauptmenü ausführen: 
+\begin{itemize}
+\item Die Verbindung zu einem Server herstellen
+\item Die Verbindung zu einem Server trennen
+\item Zur Lobby Übersicht wechseln, insofern eine Serververbindung besteht.
+\item Die Anwendung beenden
+\end{itemize}
+\\
+\hline
+BEGRÜNDUNG: & Um eine Spielpartie zu erstellen oder einer solchen beizutreten, muss eine Verbindung zu einem Server aufgebaut werden. Dies muss initial vom Benutzer durchgeführt werden. Hierfür soll das Hauptmenü verwendet werden.\\
+\hline
+ABHÄNGIGKEITEN: & F2\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA2} \\
+\hline
+TITEL: & Lobby Übersicht \\
+\hline
+BESCHREIBUNG: & Der Benutzer kann über die Lobby Übersicht nach vorhandenen Lobbies suchen, eine neue Lobby erstellen oder einer bereits vorhandenen Lobby beitreten. Hierfür soll eine View erstellt werden, die es dem Benutzer ermöglicht, alle relevanten Informationen zur Spielsuche zu erfassen.
+Auch soll es möglich sein, zum Hauptmenü zurückzukehren.
+\textbf{\textit{Hinweis: Diese funktionale Anforderung beschreibt zwar die Lobby Übersicht als Ganzes, aber ist dennoch recht unpräzise. Deshalb wird in FA3 auf EIN weiteres Detail der Lobby Übersicht eingegangen. Für die Bearbeitung Ihres Übungsblattes können Sie gerne weitere funktionale Anforderungen für die Lobby Übersicht verfassen. Überlegen Sie sich auch für funktionale Anforderungen, die Sie verfasst haben, ob diese schon atomar sind. Falls nicht, zerlegen Sie eine große funktionale Anforderung in mehrere kleinere, atomare funktionale Anforderungen.}}
+\\
+\hline
+BEGRÜNDUNG: & Um eine Spielpartie zu bestreiten, muss man zuvor in einer Lobby gewesen sein, die hier aufgeführten Funktionalitäten sind somit zwingend Notwendig. \\
+\hline
+ABHÄNGIGKEITEN: & FA1, FA3\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA3} \\
+\hline
+TITEL: & Lobby erstellen \\
+\hline
+BESCHREIBUNG: & Der Benutzer soll die Möglichkeit haben, eine neue Lobby zu erstellen. Eine Lobby kann erstellt werden, indem der Benutzer auf eine Schaltfläche (Button) mit der Aufschrift 'Lobby erstellen' klickt. Nachdem die Schaltfläche geklickt wurde, soll sich ein Dialog öffnen. Auf diesem Dialog soll ein Textfeld zur Eingabe eines Namens für die Lobby eingeblendet werden. Durch einen weiteren Button mit der Aufschrift 'Absenden' wird eine Nachricht an den Server geschickt, welche die Erstellung einer neuen Lobby mit dem ausgewählten Namen beauftragt.\textbf{\textit{Hinweis: In dieser funktionalen Anforderung wird von einer Nachricht an den Server gesprochen, diese Nachricht wird später vom Typ 'CreateNewLobby' sein. Sie werden zu einem späteren Zeitpunkt einen Netzwerkstandard ausgehändigt bekommen, in welchem alle Nachrichtenarten spezifiziert sind. Bis es soweit ist, können Sie sich allerdings trotzdem bei der Erstellung Ihrer funktionalen Anforderungen Gedanken darüber machen, an welcher Stelle Nachrichten an den Server geschickt, beziehungsweise Nachrichten vom Server empfangen werden.}}
+\\
+\hline
+BEGRÜNDUNG: & Um eine Spielpartie zu spielen, braucht der Benutzer einen Gegenspieler, um sich mit diesem zu einer Spielpartie zu verabreden, muss eine Lobby existieren, in welcher sich beide Benutzer befinden. \\
+\hline
+ABHÄNGIGKEITEN: & FA2\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA15} \\
+\hline
+TITEL: & Spielstein verdoppeln \\
+\hline
+BESCHREIBUNG: & Ein Spielstein soll verdoppelt werden, wenn der Spieler einen seiner eigenen Spielsteine in ein, zum gewählten Spielstein direkt benachbartes, freies Feld bewegt.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\subsection{Nichtfunktionale Anforderungen}
+
+Dieser Abschnitt spezifiziert die Qualitätsanforderungen (QA) an das Softwaresystem.
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{QA1} \\
+\hline
+TITEL: & Robustheit \\
+\hline
+BESCHREIBUNG: & Die Anwendung darf nicht abstürzen. Bei 100 Spielen darf maximal 1 Spiel
+aufgrund eines Fehlers abgebrochen werden. \\
+\end{tabularx}
+
+\end{document}
