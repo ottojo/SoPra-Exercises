@@ -3,10 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-
+  latex:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: ottojo/uberblatt-action
     - name: Compile and Deploy LaTeX to PDF
+      uses: ottojo/uberblatt-action@master
