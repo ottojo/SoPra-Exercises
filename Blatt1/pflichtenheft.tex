@@ -155,7 +155,7 @@ ABHÄNGIGKEITEN: & FA1, FA3\\
 \hline
 TITEL: & Lobby erstellen \\
 \hline
-BESCHREIBUNG: & Der Benutzer soll die Möglichkeit haben, eine neue Lobby zu erstellen. Eine Lobby kann erstellt werden, indem der Benutzer auf eine Schaltfläche (Button) mit der Aufschrift 'Lobby erstellen' klickt. Nachdem die Schaltfläche geklickt wurde, soll sich ein Dialog öffnen. Auf diesem Dialog soll ein Textfeld zur Eingabe eines Namens für die Lobby eingeblendet werden. Durch einen weiteren Button mit der Aufschrift 'Absenden' wird eine Nachricht an den Server geschickt, welche die Erstellung einer neuen Lobby mit dem ausgewählten Namen beauftragt.\textbf{\textit{Hinweis: In dieser funktionalen Anforderung wird von einer Nachricht an den Server gesprochen, diese Nachricht wird später vom Typ 'CreateNewLobby' sein. Sie werden zu einem späteren Zeitpunkt einen Netzwerkstandard ausgehändigt bekommen, in welchem alle Nachrichtenarten spezifiziert sind. Bis es soweit ist, können Sie sich allerdings trotzdem bei der Erstellung Ihrer funktionalen Anforderungen Gedanken darüber machen, an welcher Stelle Nachrichten an den Server geschickt, beziehungsweise Nachrichten vom Server empfangen werden.}}
+BESCHREIBUNG: & Der Benutzer soll die Möglichkeit haben, eine neue Lobby zu erstellen. Eine Lobby kann erstellt werden, indem der Benutzer auf eine Schaltfläche (Button) mit der Aufschrift 'Lobby erstellen' klickt. Nachdem die Schaltfläche geklickt wurde, soll sich ein Dialog öffnen. Auf diesem Dialog soll ein Textfeld zur Eingabe eines Namens für die Lobby eingeblendet werden. Durch einen weiteren Button mit der Aufschrift 'Absenden' wird eine Nachricht an den Server geschickt, welche die Erstellung einer neuen Lobby mit dem ausgewählten Namen beauftragt.
 \\
 \hline
 BEGRÜNDUNG: & Um eine Spielpartie zu spielen, braucht der Benutzer einen Gegenspieler, um sich mit diesem zu einer Spielpartie zu verabreden, muss eine Lobby existieren, in welcher sich beide Benutzer befinden. \\
@@ -178,7 +178,63 @@ ABHÄNGIGKEITEN: & FA2\\
 \end{tabularx}
 
 \begin{tabularx}{16cm}{l|X}
-\textbf{ID} & \textbf{FA10} \\
+\textbf{ID} & \textbf{FA5} \\
+\hline
+TITEL: & Lobby verlassen \\
+\hline
+BESCHREIBUNG: & Wenn der Spieler einer Lobby beigetreten ist, muss es diesem möglich sein, die Lobby durck klicken einer entsprechenden Schaltfläche wieder zu verlassen.
+\\
+\hline
+BEGRÜNDUNG: & Es soll dem Spieler möglich sein, einen passenden Gegenspieler zu finden.\\
+\hline
+ABHÄNGIGKEITEN: & FA2\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA6} \\
+\hline
+TITEL: & Spielbildschirm \\
+\hline
+BESCHREIBUNG: & Der Spielbildschirm soll dem Spieler das Spielfeld präsentieren, auf dem der Spieler den aktuellen Spielstand sehen kann und Spielzüge vornehmen kann.
+Dieser Bildschirm wird während des gesamten Spiels angezeigt und kann nur durch Sieg eines Spielers oder durch Beenden des Programms verlassen werden. 
+\\
+\hline
+BEGRÜNDUNG: &\\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA7} \\
+\hline
+TITEL: & Spielfeld \\
+\hline
+BESCHREIBUNG: & Das Spielfeld muss in der im Lastenheft spezifizierten Form aufgebaut und angezeigt werden.
+Auf dem Spielfeld muss ersichtlich sein, welche Felder von welchem Spieler belegt sind, welche leer sind, und welche nicht belegt werden können.
+\\
+\hline
+BEGRÜNDUNG: &\\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{F8} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: &\\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA9} \\
 \hline
 TITEL: & Spielzüge des Gegners darstellen \\
 \hline
@@ -188,6 +244,19 @@ BESCHREIBUNG: & Während des Spiels sollen Spielzüge des Gegners nach Empfang d
 BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
 \hline
 ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA10} \\
+\hline
+TITEL: & Spielende erkennen \\
+\hline
+BESCHREIBUNG: & Wenn eine der beiden Siegbedingungen erfüllt ist, muss das Ende des Spiels festgestellt werden.
+\\
+\hline
+BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
+\hline
+ABHÄNGIGKEITEN: & FA11, FA12\\
 \end{tabularx}
 
 \begin{tabularx}{16cm}{l|X}
@@ -256,6 +325,123 @@ BEGRÜNDUNG: & Diese Aktion ist Teil der Spielmechanik. \\
 ABHÄNGIGKEITEN: & \\
 \end{tabularx}
 
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA16} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA17} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA18} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA19} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA20} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA21} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA22} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA23} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{FA24} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\hline
+BEGRÜNDUNG: & \\
+\hline
+ABHÄNGIGKEITEN: & \\
+\end{tabularx}
+
 \subsection{Nichtfunktionale Anforderungen}
 
 Dieser Abschnitt spezifiziert die Qualitätsanforderungen (QA) an das Softwaresystem.
@@ -267,6 +453,24 @@ TITEL: & Robustheit \\
 \hline
 BESCHREIBUNG: & Die Anwendung darf nicht abstürzen. Bei 100 Spielen darf maximal 1 Spiel
 aufgrund eines Fehlers abgebrochen werden. \\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{QA2} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
+\end{tabularx}
+
+\begin{tabularx}{16cm}{l|X}
+\textbf{ID} & \textbf{QA3} \\
+\hline
+TITEL: & \\
+\hline
+BESCHREIBUNG: & 
+\\
 \end{tabularx}
 
 \end{document}
