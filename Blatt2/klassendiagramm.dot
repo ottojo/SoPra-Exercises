@@ -1,0 +1,42 @@
+digraph G {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+
+    node [
+            fontname = "Bitstream Vera Sans"
+            fontsize = 8
+            shape = "record"
+    ]
+
+    edge [
+            fontname = "Bitstream Vera Sans"
+            fontsize = 8
+    ]
+
+	Spielfeld [
+		label= "{Spielfeld}"
+	]
+    Spielstein [
+        label= "{Spielstein|+ Farbe: \"rot\"/\"blau\"}"
+    ]
+    Spieler [
+        label= "{Spieler|+ Name: Text}"
+    ]
+    Spielpartie [
+    ]
+    Kachel [
+        label= "{Kachel|+ Blockiert: Wahrheitswert}"
+    ]
+
+    edge [
+        arrowhead = "ediamond"
+    ]
+
+    Spielstein -> Kachel [headlabel=" 1 ", taillabel="0..1"]
+
+    Spielfeld -> Spielpartie [headlabel=" 1 ", taillabel=" 1 "]
+
+    Spieler -> Spielpartie [headlabel=" 1  ", taillabel="2"]
+
+    Kachel -> Spielfeld [taillabel="61", headlabel=" 1 "]
+}
