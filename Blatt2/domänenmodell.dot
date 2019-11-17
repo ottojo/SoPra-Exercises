@@ -13,9 +13,9 @@ digraph G {
             fontsize = 8
     ]
 
-	Spielfeld [
+    Spielfeld [
 		label= "{Spielfeld}"
-	]
+    ]
     Spielstein [
         label= "{Spielstein|+ Farbe: \"rot\"/\"blau\"}"
     ]
@@ -27,6 +27,9 @@ digraph G {
     Kachel [
         label= "{Kachel|+ Blockiert: Wahrheitswert}"
     ]
+    Lobby [
+        label="{Lobby}"
+    ]
 
     edge [
         arrowhead = "ediamond"
@@ -34,9 +37,15 @@ digraph G {
 
     Spielstein -> Kachel [headlabel=" 1 ", taillabel="0..1"]
 
-    Spielfeld -> Spielpartie [headlabel=" 1 ", taillabel=" 1 "]
+    Spielfeld -> Spielpartie [headlabel=" 1    ", taillabel=" 1 "]
 
     Spieler -> Spielpartie [headlabel=" 1  ", taillabel="2"]
 
-    Kachel -> Spielfeld [taillabel="61", headlabel=" 1 "]
+    Spieler -> Lobby [headlabel=" 1  ", taillabel="2"]
+
+    Kachel -> Spielfeld [taillabel="61", headlabel=" 1     "]
+
+    Spieler -> Spielstein [label="bewegt", arrowhead="normal"]
+
+    Spielpartie -> Lobby [headlabel="1", taillabel="1"]
 }
