@@ -4,6 +4,7 @@
 \usepackage[ngerman]{babel}
 \usepackage{tikz}
 \usepackage{tikz-uml}
+\usetikzlibrary{positioning}
 
 
 \author{Jonas Otto}
@@ -36,6 +37,29 @@
     \umlassoc{Nutzer}{lverlassen}
     \umlassoc{Nutzer}{lbeitreten}
 
+\end{tikzpicture}
+
+\section{UML-Zustandsdiagramm}
+\subsection{Client}
+\begin{tikzpicture}
+    \umlbasicstate[x=0, y=0, name=menu]{Hauptmenü}
+    \umlbasicstate[below=2cm of menu, name=lobbyoverview]{Lobbyübersicht}
+    \umlbasicstate[below=2cm of lobbyoverview, name=lobby]{Lobby}
+    \begin{umlstate}[x=12, y=0, name=game]{Spiel}
+        \begin{umlstate}[x=0, y=0, name=zug]{Am Zug}
+        \end{umlstate}
+        \begin{umlstate}[x=0, y=-3, name=gegnerZug]{Gegner am Zug}
+        \end{umlstate}
+    \end{umlstate}
+
+    \umlstateinitial[name=initial, y=3]
+    \umltrans[arg=Starten, pos=0.5]{initial}{menu} 
+
+    \umltrans[arg=Server wählen, recursive=-20|10|3.5cm, pos=1.5, recursive direction=right to right]{menu}{menu}
+    \umltrans{menu}{lobbyoverview}
+    \umltrans[arg=Betreten, pos=0.5]{lobbyoverview}{lobby}
+    \umlHVHtrans[arg=Verlassen,pos=0.8, arm1=-2cm]{lobby}{lobbyoverview}
+    \umlHVtrans{lobby}{game}
 \end{tikzpicture}
 
 \end{document}
