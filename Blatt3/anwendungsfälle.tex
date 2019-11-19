@@ -16,15 +16,26 @@
 \begin{tikzpicture} 
     %\draw[style=help lines] (0,0) grid  (3,3);
     \umlactor[y=-1]{Spieler}
+    \umlactor[y=-6]{Nutzer}
     \begin{umlsystem}[x=4, y=0]{HEXXAGON} 
         \umlusecase[x=3, y=-1, name=spielen]{Spielen}
         \umlusecase[name=bewegen, width=2cm]{Spielstein bewegen}
         \umlusecase[y=-2, name=verdoppeln, width=2cm]{Spielstein verdoppeln}
+        \umlusecase[y=-4, width=2cm, name=lerstellen]{Lobby erstellen}
+        \umlusecase[y=-6, width=2cm, name=lverlassen]{Lobby verlassen}
+        \umlusecase[y=-8, width=2cm, name=lbeitreten]{Lobby beitreten}
+        \umlusecase[y=-7, x=3, width=2cm, name=lnav]{Lobby navigieren}
     \end{umlsystem} 
     \umlinherit{bewegen}{spielen}
     \umlinherit{verdoppeln}{spielen}
     \umlassoc{Spieler}{bewegen}
     \umlassoc{Spieler}{verdoppeln}
+    \umlinherit{lverlassen}{lnav}
+    \umlinherit{lbeitreten}{lnav}
+    \umlassoc{Nutzer}{lerstellen}
+    \umlassoc{Nutzer}{lverlassen}
+    \umlassoc{Nutzer}{lbeitreten}
+
 \end{tikzpicture}
 
 \end{document}
