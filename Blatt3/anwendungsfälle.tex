@@ -15,7 +15,6 @@
 
 \section{UML-Anwendungsfalldiagramm}
 \begin{tikzpicture} 
-    %\draw[style=help lines] (0,0) grid  (3,3);
     \umlactor[y=-1]{Spieler}
     \umlactor[y=-6]{Nutzer}
     \begin{umlsystem}[x=4, y=0]{HEXXAGON} 
@@ -46,10 +45,10 @@
     \umlbasicstate[below=2cm of menu, name=lobbyoverview]{Lobbyübersicht}
     \umlbasicstate[below=2cm of lobbyoverview, name=lobby]{Lobby}
     \begin{umlstate}[x=6, name=game]{Spiel}
-        \begin{umlstate}[x=0, y=0, name=zug]{Am Zug}
-        \end{umlstate}
-        \begin{umlstate}[x=0, y=-3, name=gegnerZug]{Gegner am Zug}
-        \end{umlstate}
+        \umlbasicstate[x=0, y=0, name=zug]{Am Zug}
+        \umlbasicstate[x=0, y=-3, name=gegnerZug]{Gegner am Zug}
+        \umltrans[arg=srv.Move, pos=0.5]{zug}{gegnerZug}
+        \umlHVHtrans[arm1=3cm, arg=srv.Move, pos=0.5]{gegnerZug}{zug}
     \end{umlstate}
 
     \umlstateinitial[name=initial, y=3]
@@ -58,18 +57,68 @@
     \umltrans[arg=Server wählen, recursive=-20|10|3.5cm, pos=1.5, recursive direction=right to right]{menu}{menu}
     \umltrans{menu}{lobbyoverview}
     \umltrans[arg=Betreten, pos=0.5]{lobbyoverview}{lobby}
-    \umlHVHtrans[arg=Verlassen,pos=0.8, arm1=-2cm]{lobby}{lobbyoverview}
+    \umlHVHtrans[arg=Verlassen,pos=0.8, arm1=-2cm, anchor2=190]{lobby}{lobbyoverview}
     \umlHVtrans[arg=Starten, pos=0.5]{lobby}{game}
+    \umlHVHtrans[arg=Verlassen,pos=0.8, arm1=-2cm, anchor1=170]{lobbyoverview}{menu}
+    \umlHVtrans[arg=Spielende, pos=0.5, anchor2=290]{game}{menu}
 \end{tikzpicture}
 
 \subsection{Server}
 \begin{tikzpicture}
-    \umlstateinitial[name=initial, y=3]
-    \begin{umlstate}[name=game]{Spiel}
-        \umlbasicstate[y=0]{Waiting P1}
-        \umlbasicstate[y=-3]{Waiting P2}
+    \umlstateinitial[name=initial, y=3, x=4]
+    \begin{umlstate}[name=game, x=0, y=0]{Spiel}
+        \umlbasicstate[y=0, name=p1]{Waiting P1}
+        \umlbasicstate[y=-3, name=p2]{Waiting P2}
+        \umltrans[anchor1=260, anchor2=100]{p1}{p2}
+        \umltrans[anchor1=80, anchor2=280]{p2}{p1}
     \end{umlstate}
+
+    \begin{umlstate}[name=lobby, x=4, y=0.5]{Lobby}
+    \end{umlstate}
+
     \umlstatefinal[name=final, below=1cm of game]
+
+    \umltrans{initial}{lobby}
+    \umlVHtrans[arg={srv.Start /c*.Start}, pos=1.5, text width=2cm]{lobby}{game}
+    \umltrans[arg={srv.End /c*.End}, pos=0.5, text width=2cm]{game}{final}
+\end{tikzpicture}
+
+\section{UML-Sequenzdiagramm}
+\begin{tikzpicture}
+    \begin{umlseqdiag}
+        \umlactor[class=Player]{a}
+        \umlactor[class=Player, x=8]{b}
+
+        \umlcreatecall[class=Lobby, x=4]{a}{l}
+        \begin{umlcall}[op={join}, dt=7]{a}{l}
+        \end{umlcall}
+        \begin{umlcall}[op={join}, dt=8]{b}{l}
+        \end{umlcall}
+        \umlcreatecall[class=Game, x=4]{a}{g}
+
+        \begin{umlfragment}[type=game, inner xsep=2] 
+
+            \begin{umlcall}[op={move(i,j)}, return=success, dt=7]{a}{g}
+            \end{umlcall}
+
+            \begin{umlcall}[op={move(i,j)}, return=fail, dt=28]{b}{g}
+            \end{umlcall}
+            \begin{umlcall}[op={move(i,j)}, return=success, dt=6]{b}{g}
+            \end{umlcall}
+
+            \begin{umlcall}[op={move(i,j)}, return=not allowed, dt=6]{b}{g}
+            \end{umlcall}
+
+            \begin{umlcall}[op={move(i,j)}, return=success, dt=33]{a}{g}
+            \end{umlcall}
+        \end{umlfragment}
+
+        \begin{umlcall}[op=end(lost), dt=7]{g}{a}
+            \begin{umlcall}[op=end(won)]{g}{b}
+                \end{umlcall}
+        \end{umlcall}
+
+    \end{umlseqdiag}
 \end{tikzpicture}
 
 \end{document}
