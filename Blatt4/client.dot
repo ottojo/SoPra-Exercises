@@ -1,0 +1,113 @@
+digraph G {
+    // General Layout
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+
+    node [
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+        shape = "record"
+    ]
+
+    edge [
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+        arrowhead = "onormal"
+        labeldistance = 1.5
+    ]
+
+    // Classes
+
+    HexxagonClient [
+        label = "{HexxagonClient|-currentScreen\l-window: sf::RenderWindow|+ main()\l}"
+    ]
+
+    HexxagonGame [
+        label = "{HexxagonGame|currentPlayer: Player\l|- verifyMove(Field &from, Field &to)\l+ doMove(int from, int to)\l+ updateBoard(Board)\l+ getBoard()}"
+    ]
+    
+    Board [
+        label = "{Board||+ getNeighbour(Field &)\l}"
+    ]
+
+    Field [
+        label = "{Field|state: FieldState\l|}"
+    ]
+
+    Player [
+        label = "{Player|- color: Color\l|+ getColor()\l}"
+    ]
+    
+    FieldState [
+        label = "{\<\<enumeration\>\>\nFieldState|+ BLOCKED\l+ FREE\l+ PLAYERONE\l+ PLAYERTWO\l+ START\l}"
+    ]
+
+    Color [
+        label = "{\<\<enumeration\>\>\nColor|+ RED\l+ BLUE\l}"
+    ]
+
+    Screen [
+        label = "{Screen||+ render(sf::RenderWindow &)\l}"
+    ]
+
+    GameScreen [
+        label = "{GameScreen||+ updateBoard(Board)\l}"
+    ]
+
+    MainMenu [
+        label = "{MainMenu||+ updateUserName(std::string)\l+ updateServer(std::string)\l}"
+    ]
+
+    GameController [
+        label = "{GameController||+ handleInput(sf::Event)\l}"
+    ]
+    
+    MenuController [
+        label = "{MenuController|- userName: std::string\l- serverAddress: std::string\l|+ handleInput(sf::Event)\l}"
+    ]
+
+
+    // Inheritance
+    MainMenu -> Screen
+    GameScreen -> Screen
+
+    // Aggregations
+    edge [
+        arrowhead = "odiamond"
+    ]
+    Board -> HexxagonGame [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+    Player -> HexxagonGame [
+        headlabel = "1"
+        taillabel = "2"
+    ]
+    HexxagonGame -> GameController [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+    GameScreen -> GameController [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+    MainMenu -> MenuController [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+    GameController -> HexxagonClient [
+        headlabel = "1"
+        taillabel = "1"
+    ]  
+    MenuController -> HexxagonClient [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+
+    // Compositions
+    edge [
+        arrowhead = "diamond"
+    ]
+    Field -> Board
+    
+}
