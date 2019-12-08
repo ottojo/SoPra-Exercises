@@ -1,4 +1,5 @@
 all: anwendungsfälle.pdf 
+	$(info ARTIFACTS:anwendungsfälle.pdf)
 
 anwendungsfälle.pdf: anwendungsfälle.tex tikz-uml.sty
 	latexmk -pdf anwendungsfälle.tex	
