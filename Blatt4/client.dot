@@ -39,7 +39,7 @@ digraph G {
     ]
     
     FieldState [
-        label = "{\<\<enumeration\>\>\nFieldState|+ BLOCKED\l+ FREE\l+ PLAYERONE\l+ PLAYERTWO\l+ START\l}"
+        label = "{\<\<enumeration\>\>\nFieldState|+ BLOCKED\l+ FREE\l+ PLAYERONE\l+ PLAYERTWO\l}"
     ]
 
     Color [

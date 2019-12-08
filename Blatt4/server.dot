@@ -1,0 +1,117 @@
+digraph G {
+    // General Layout
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+
+    node [
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+        shape = "record"
+    ]
+
+    edge [
+        fontname = "Bitstream Vera Sans"
+        fontsize = 8
+        arrowhead = "onormal"
+        labeldistance = 1.5
+    ]
+
+    // Classes
+    HexxagonServer [
+        label = "{HexxagonServer|- lobbys: std::vector<Lobby>|+ main()\l+ acceptConnection()\l}"
+    ]
+
+    HexxagonGame [
+        label = "{HexxagonGame|- currentPlayer: Player&\l- player1: Player\l- player2: Player\l|- verifyMove(Field &from, Field &to)\l+ doMove(int from, int to)\l+ updateBoard(Board)\l+ getBoard()\l+ isFull(): bool\l+ HexxagonGame(Lobby)\l}"
+    ]
+
+    Lobby [
+        label = "{Lobby|- player1: Player\l- player2: Player\l|+ addPlayer(Player): bool}"
+    ]
+    
+    Board [
+        label = "{Board||+ getNeighbour(Field &)\l}"
+    ]
+
+    Field [
+        label = "{Field|state: FieldState\l|}"
+    ]
+
+    Player [
+        label = "{Player|- color: Color\l|+ getColor()\l+ sendMessage(Message)\l+ readMessage(): Message\l}"
+    ]
+    
+    FieldState [
+        label = "{\<\<enumeration\>\>\nFieldState|+ BLOCKED\l+ FREE\l+ PLAYERONE\l+ PLAYERTWO\l}"
+    ]
+
+    Color [
+        label = "{\<\<enumeration\>\>\nColor|+ RED\l+ BLUE\l}"
+    ]
+
+    Message [
+        label = "{Message||getJSON()\l}"
+    ]
+    
+    WelcomeMessage
+    GetAvailableLobbiesMessage
+    AvailableLobbiesMessage
+    CreateNewLobbyMessage
+    LobbyCreatedMessage
+    JoinLobbyMessage
+    LobbyJoinedMessage
+    LobbyStatusMessage
+    LeaveLobbyMessage
+    StartGameMessage
+    GameStartedMessage
+    GameStatusMessage
+    GameMoveMessage
+    LeaveGameMessage
+    StrikeMessage
+    
+
+    // Inheritance
+    WelcomeMessage -> Message
+    GetAvailableLobbiesMessage -> Message
+    AvailableLobbiesMessage -> Message
+    CreateNewLobbyMessage -> Message
+    LobbyCreatedMessage -> Message
+    JoinLobbyMessage -> Message
+    LobbyJoinedMessage -> Message
+    LobbyStatusMessage -> Message
+    LeaveLobbyMessage -> Message
+    StartGameMessage -> Message
+    GameStartedMessage -> Message
+    GameStatusMessage -> Message
+    GameMoveMessage -> Message
+    LeaveGameMessage -> Message
+    StrikeMessage -> Message
+
+    // Aggregations
+    edge [
+        arrowhead = "odiamond"
+    ]
+    Board -> HexxagonGame [
+        headlabel = "1"
+        taillabel = "1"
+    ]
+    Player -> HexxagonGame [
+        headlabel = "1"
+        taillabel = "2"
+    ]
+    HexxagonGame -> HexxagonServer [
+        headlabel = "1"
+        taillabel = "0..n"
+    ]
+    Lobby -> HexxagonServer [
+        headlabel = "1"
+        taillabel = "0..n"
+    ]
+
+    // Compositions
+    edge [
+        arrowhead = "diamond"
+    ]
+    Field -> Board
+    
+}

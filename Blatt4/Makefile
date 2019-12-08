@@ -1,8 +1,8 @@
-all: client.pdf
-	$(info ARTIFACTS:client.pdf)
+all: client.pdf server.pdf
+	$(info ARTIFACTS:client.pdf,server.pdf)
 
-client.pdf: client.dot
-	dot -T pdf -o $@ client.dot
+%.pdf: %.dot
+	dot -T pdf -o $@ $<
 
 .PHONY: clean
 clean:
